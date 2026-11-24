@@ -141,3 +141,145 @@
 .mp-q small { display: block; font-weight: 600; color: #64748b; margin-top: 2px; }
 .mp-q:hover:not(:disabled) { border-color: #B41F8E; background: #fdf2fa; } .mp-q:disabled { opacity: 0.5; cursor: not-allowed; }
 @media (max-width: 720px) { .mp-stage { grid-template-columns: 1fr 1fr; } .mp-log { grid-column: 1 / -1; order: 3; } }
+
+/* ---------- Mobile Responsive Fix (iPhone / Android) ---------- */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+@media (max-width: 640px) {
+    .header-inner {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+    .brand-and-level {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+    }
+    .pg-profile-pill {
+        flex: 1;
+        min-width: 0;
+        padding: 4px 8px;
+    }
+    .progress-wrap {
+        width: 100%;
+        max-width: 165px;
+    }
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .line-switcher-inner {
+        padding: 6px 10px;
+    }
+    .main-container {
+        padding: 8px 8px 72px;
+        gap: 10px;
+    }
+    .supermarket-world {
+        border-radius: 16px;
+        border-width: 2px;
+    }
+    .mall-ceiling {
+        height: auto;
+        min-height: 46px;
+        padding: 6px 10px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .hanging-promo-banner {
+        display: none;
+    }
+    .mall-back-wall {
+        padding: 8px 10px 4px;
+        gap: 6px;
+        overflow-x: auto;
+    }
+    .distant-department {
+        font-size: 10px;
+        padding: 4px 8px;
+        white-space: nowrap;
+    }
+    .mall-pedestrian-aisle {
+        height: 96px;
+    }
+    .mall-foreground-stage {
+        grid-template-columns: 1fr !important;
+        padding: 10px 10px 14px;
+        gap: 14px;
+    }
+    .gondola-rack,
+    .booth-stage-area,
+    .characters-live-floor,
+    .actor-spot {
+        min-width: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+    .gondola-top-canopy {
+        flex-wrap: wrap;
+        gap: 4px;
+        font-size: 10.5px;
+    }
+    .gondola-shelves-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+    }
+    .pack-svg {
+        width: 58px;
+    }
+    .characters-live-floor {
+        grid-template-columns: 1fr !important;
+        padding: 0 0 12px;
+        gap: 14px;
+    }
+    .overhead-speech-bubble {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px 11px;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    .bubble-top-bar {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .cust-speech-text {
+        font-size: 13.5px;
+        word-break: break-word;
+    }
+    .char-svg {
+        width: 120px;
+    }
+    .aeon-checkout-desk {
+        padding: 8px 10px;
+    }
+    .desk-surface-props {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .desk-front-sign {
+        flex-wrap: wrap;
+        gap: 4px;
+        font-size: 11px;
+    }
+    .interaction-console {
+        padding: 12px 10px;
+        border-radius: 16px;
+    }
+    .console-header h3 {
+        font-size: 14px;
+    }
+    .option-text {
+        font-size: 13px;
+    }
+    #mp-fab {
+        right: 12px;
+        bottom: 12px;
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+}
