@@ -359,6 +359,22 @@
       if (scen) speakEnglish(scen.keyPhrase);
     },
 
+    mpShowScenario: function (id) {
+      var sc = data.scenarios.find(function (x) { return x.id === id; });
+      if (!sc) return;
+      state.selectedLineId = sc.lineId;
+      state.scenarioIndexInLine = getLineScenarios(sc.lineId).findIndex(function (x) { return x.id === id; });
+      resetTurnState();
+      saveState();
+      render();
+      speakEnglish(sc.customerSpeech, "customer");
+    },
+
+    mpInfo: function () {
+      var l = getLevelObject(state.diamonds);
+      return { level: l.level, title: l.title, diamonds: state.diamonds };
+    },
+
     speakCustomerReply: function () {
       var ls = getLineScenarios(state.selectedLineId);
       var sc = ls[state.scenarioIndexInLine] || ls[0];
@@ -380,6 +396,7 @@
 
     chooseOption: function (optIdx) {
       if (state.feedback && state.feedback.type === "success") return;
+      if (window.AEON_MP && AEON_MP.active() && !AEON_MP.pending()) return;
 
       var lineScenarios = getLineScenarios(state.selectedLineId);
       var currentScenario = lineScenarios[state.scenarioIndexInLine] || lineScenarios[0];
@@ -422,9 +439,10 @@
           render();
         }, 1200);
 
+        if (window.AEON_MP) AEON_MP.onAnswer({ scenId: currentScenario.id, text: option.text, correct: true, reward: totalEarned });
         flyItemToCart();
         if ("speechSynthesis" in window) {
-          var dlgNow = DLG[currentScenario.id];
+          var dlgNow = window.AEON_MP && AEON_MP.active() ? null : DLG[currentScenario.id];
           speakEnglish(option.text, "pg", function () {
             if (dlgNow) speakEnglish(dlgNow.reply, "customer");
           });
@@ -446,12 +464,14 @@
           type: "error",
           text: option.feedbackVi
         };
+        if (window.AEON_MP) AEON_MP.onAnswer({ scenId: currentScenario.id, text: option.text, correct: false });
         saveState();
         render();
       }
     },
 
     nextCustomer: function () {
+      if (window.AEON_MP && AEON_MP.active()) return;
       var lineScenarios = getLineScenarios(state.selectedLineId);
       var nextIdx = state.scenarioIndexInLine + 1;
       if (nextIdx < lineScenarios.length) {
@@ -530,7 +550,7 @@
     var lineScenarios = getLineScenarios(currentLine.id);
     var currentScenario =
         lineScenarios[state.scenarioIndexInLine] || lineScenarios[0];
-    var dlg = DLG[currentScenario.id];
+    var dlg = window.AEON_MP && AEON_MP.active() ? null : DLG[currentScenario.id];
     var fbType = state.feedback ? state.feedback.type : null;
     var custMood = fbType === "success" ? "happy" : fbType === "error" ? "upset" : "think";
     var pgMood = fbType === "success" ? "happy" : fbType === "error" ? "think" : "smile";
