@@ -1,0 +1,114 @@
+/* AEON Mall — realistic-people layer (loaded after styles.css) */
+
+/* ---------- Characters ---------- */
+.pg-standee,
+.cust-standee {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: auto;
+    height: auto;
+    min-width: 140px;
+    border-radius: 0;
+    overflow: visible;
+    animation-name: none;
+}
+.pg-standee.animate-float { animation: none; }
+.actor-emoji-face { margin-top: 0; font-size: 0; line-height: 0; filter: none; }
+.char-svg { width: 150px; height: auto; display: block; overflow: visible; }
+.char-pair { display: flex; align-items: flex-end; }
+.char-pair .char-svg { width: 104px; }
+.char-pair .char-svg + .char-svg { margin-left: -14px; }
+.actor-uniform-label {
+    position: static;
+    margin-top: -4px;
+    padding: 3px 11px;
+    border-radius: 999px;
+    background: #B41F8E;
+    box-shadow: 0 3px 8px rgba(140, 25, 116, 0.3);
+}
+.cust-standee .actor-uniform-label { background: #0369a1; }
+
+.char-svg .body { transform-origin: 60px 164px; transform-box: view-box; animation: charBreathe 3.4s ease-in-out infinite; }
+@keyframes charBreathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.018); } }
+
+.blink { transform-box: fill-box; transform-origin: center; animation: charBlink 4.2s infinite; }
+@keyframes charBlink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.08); } }
+
+.talk { transform-box: fill-box; transform-origin: center; animation: charTalk 0.26s ease-in-out infinite alternate; }
+@keyframes charTalk { from { transform: scaleY(0.25); } to { transform: scaleY(1.15); } }
+
+.head-idle, .head-nod, .head-shake, .head-tilt { transform-box: view-box; transform-origin: 60px 104px; }
+.head-idle { animation: headIdle 5s ease-in-out infinite; }
+.head-nod { animation: headNod 0.7s ease-in-out 3; }
+.head-shake { animation: headShake 0.3s ease-in-out 3; }
+.head-tilt { transform: rotate(-4deg); animation: headSway 3s ease-in-out infinite; }
+@keyframes headIdle { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(1.5deg); } }
+@keyframes headNod { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(5px) rotate(2deg); } }
+@keyframes headShake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 75% { transform: rotate(7deg); } }
+@keyframes headSway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(-1deg); } }
+
+.wave { transform-box: view-box; transform-origin: 98px 132px; animation: charWave 1.1s ease-in-out infinite; }
+@keyframes charWave { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(14deg); } }
+.pay { animation: charPay 0.55s ease-out both; }
+@keyframes charPay { from { transform: translateX(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---------- Walking shoppers (aisle) ---------- */
+.mall-pedestrian-aisle { height: 124px; }
+.mall-pedestrian-aisle::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+            repeating-linear-gradient(100deg, transparent 0 150px, rgba(255, 255, 255, 0.55) 150px 200px),
+            linear-gradient(180deg, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0.6) 100%);
+    opacity: 0.6;
+}
+.passerby-figure { font-size: 0; line-height: 0; filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.12)); -webkit-box-reflect: below -2px linear-gradient(transparent 62%, rgba(255, 255, 255, 0.4)); }
+.walker-svg { width: auto; display: block; overflow: visible; }
+.walker-svg.flip { transform: scaleX(-1); }
+.w-bob { animation: wBob 0.5s ease-in-out infinite alternate; }
+@keyframes wBob { from { transform: translateY(0); } to { transform: translateY(-1.8px); } }
+.w-leg, .w-arm { transform-box: view-box; animation: wSwing 0.5s ease-in-out infinite alternate; }
+.w-leg-f, .w-arm-b { animation-name: wSwingA; }
+.w-leg-b, .w-arm-f { animation-name: wSwingB; }
+@keyframes wSwingA { from { transform: rotate(24deg); } to { transform: rotate(-24deg); } }
+@keyframes wSwingB { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
+
+/* ---------- Shelf packaging ---------- */
+.slot-icon { font-size: 0; line-height: 0; display: flex; justify-content: center; }
+.pack-svg { width: 74px; height: auto; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.2)); }
+
+/* ---------- Glossy floor ---------- */
+.mall-foreground-stage { overflow: hidden; }
+.mall-foreground-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 28%, rgba(255, 255, 255, 0.45) 42%, transparent 56%);
+    opacity: 0.4;
+}
+
+/* ---------- POS + flying item ---------- */
+.pos-unit { background: #0f172a; color: #86efac; border-color: #334155; font-family: "Courier New", monospace; letter-spacing: 0.04em; }
+.pos-unit.scanning { animation: posScan 0.7s ease-out; }
+@keyframes posScan { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.9); } 100% { box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); } }
+.fly-item { position: fixed; z-index: 300; pointer-events: none; width: 60px; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3)); }
+.fly-item svg { width: 100%; height: auto; }
+
+/* ---------- Conversation extras ---------- */
+.cust-reply { margin-top: 8px; padding: 8px 10px; border-radius: 12px; background: #f0f9ff; border: 1.5px solid #7dd3fc; font-size: 13px; line-height: 1.45; color: #0c4a6e; }
+.cust-reply-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cust-reply p { margin: 3px 0 0; font-weight: 700; }
+.cust-reply-vi { margin-top: 3px; font-size: 12px; color: #475569; }
+.grammar-spot { margin: 8px 0 2px; padding: 8px 12px; border-radius: 10px; background: #fdf4ff; border-left: 4px solid #B41F8E; font-size: 13px; line-height: 1.5; color: #4a044e; }
+.grammar-spot strong { color: #8C1974; }
+
+@media (prefers-reduced-motion: reduce) {
+    .char-svg *, .walker-svg *, .blink, .talk, .wave { animation: none !important; }
+}
+
+.characters-live-floor { padding-bottom: 24px; }
