@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>English Farm — Nông trại học tiếng Anh</title>
+    <link rel="stylesheet" href="./visuals.css" />
+    <link rel="stylesheet" href="./farm.css" />
+</head>
+<body class="farm">
+<header class="f-top"><a class="back" href="./index.html">← Siêu thị AEON</a><h1>🌾 Hay Day English Farm</h1><span class="tip">Bấm vào Vườn Táo, Cây Tổ Ong, Quầy Cà Phê, Đồng Cừu... để rèn Từ Vựng · Ngữ Pháp · Luyện Nghe</span></header>
+
+<main class="mapwrap"><div class="map">
+    <svg id="f-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-label="Nông trại"><g id="f-static"></g><g id="f-crops"></g></svg>
+    <div class="cloud c1"></div><div class="cloud c2"></div>
+    <div id="f-fig"></div>
+    <div id="f-hud" class="mhud"></div>
+</div></main>
+
+<section class="f-bottom"><b>🧺 Giỏ nông sản:</b><div id="f-basket" class="basket"></div></section>
+<div id="f-dialog"></div>
+<div id="f-toast"></div>
+
+<script src="./characters.js"></script>
+<script src="./farm-data.js"></script>
+<script src="./farm-scene.js"></script>
+<script src="./farm.js"></script>
+</body>
+</html>

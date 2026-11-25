@@ -3,6 +3,8 @@
     var SKIN = { fair: ["#f7d9c4", "#e9b99a"], light: ["#f1c9a5", "#dfa77f"], tan: ["#d9a273", "#c28a5c"], brown: ["#a8714a", "#8f5c38"], asian: ["#f3d3a8", "#e2b987"] };
     var SHORT = "M33 60C30 30 46 24 60 24C75 24 91 31 87 60C81 47 71 42 60 42C49 42 40 47 33 60Z";
 
+    var HAT = '<ellipse cx="60" cy="40" rx="42" ry="8" fill="#d9b25c"/><path d="M38 40Q38 10 60 10Q82 10 82 40Z" fill="#ecca7c"/><rect x="38" y="32" width="44" height="6" fill="#b4472f"/>';
+
     function person(o) {
         var sk = SKIN[o.skin || "light"], s = sk[0], sd = sk[1];
         var hc = o.hair || "#2b1b12", shirt = o.shirt || "#3b82f6";
@@ -79,7 +81,7 @@
             '<g class="' + headCls + '">' +
             (ears ? '<circle cx="34" cy="66" r="5" fill="' + sd + '"/><circle cx="86" cy="66" r="5" fill="' + sd + '"/>' : "") +
             '<ellipse cx="60" cy="62" rx="' + faceRx + '" ry="30" fill="' + s + '"/>' + beard + front + blush + eyes + brows +
-            '<path d="M60 66Q57 73 60 74" fill="none" stroke="' + sd + '" stroke-width="2" stroke-linecap="round"/>' + mouth + glasses +
+            '<path d="M60 66Q57 73 60 74" fill="none" stroke="' + sd + '" stroke-width="2" stroke-linecap="round"/>' + mouth + glasses + (o.hat ? HAT : "") +
             "</g>" + extra + "</g>" + cart + "</svg>";
     }
 
